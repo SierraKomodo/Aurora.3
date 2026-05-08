@@ -2196,6 +2196,9 @@
 
 	return ..(speaking, hearer, used_accent)
 
+/mob/living/carbon/human/get_accent_flavor_text()
+	return flavor_texts["accent"]
+
 /mob/living/carbon/human/proc/generate_valid_languages()
 	var/list/available_languages = species.secondary_langs.Copy() + LANGUAGE_TCB
 	for(var/L in GLOB.all_languages)

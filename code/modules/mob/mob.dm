@@ -682,11 +682,16 @@
 		var/datum/accent/accent = SSrecords.accents[href_list["accent_tag"]]
 		if(accent && istype(accent))
 			var/datum/browser/accent_win = new(usr, accent.name, capitalize_first_letters(accent.name), 500, 250)
-			var/html = "[accent.description]<br>"
+			var/html = "<h3>Accent</h3>"
+			html += "[accent.description]<br>"
 			var/datum/asset/spritesheet/S = get_asset_datum(/datum/asset/spritesheet/chat)
 			html += "[S.css_tag()]<br>"
 			html += {"[S.icon_tag(accent.tag_icon)]<br>"}
 			html += "([accent.text_tag])<br>"
+			var/accent_flavor_text = get_accent_flavor_text()
+			if (accent_flavor_text)
+				html += "<h3>Flavor Text</h3>
+				html += "[accent_flavor_text]<br/>"
 			accent_win.set_content(html)
 			accent_win.open()
 

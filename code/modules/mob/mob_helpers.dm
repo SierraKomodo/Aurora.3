@@ -1264,8 +1264,14 @@ GLOBAL_LIST_INIT(organ_rel_size, list(
 				return {"<a href='byond://?src=[REF(src)];accent_tag=[url_encode(a)]'>([a.text_tag])</a>"}
 			else
 				var/datum/asset/spritesheet/S = get_asset_datum(/datum/asset/spritesheet/chat)
-				var/final_icon = "accent-[a.tag_icon]"
-				return {"<span onclick="window.location.href='byond://?src=[REF(src)];accent_tag=[url_encode(a)]'">[S.icon_tag(final_icon)]</span>"}
+				var/final_icon = S.icon_tag("accent-[a.tag_icon]")
+				if (get_accent_flavor_text())
+					final_icon += S.icon_tag("accent-flavor-text")
+				return {"<span onclick="window.location.href='byond://?src=[REF(src)];accent_tag=[url_encode(a)]'">[final_icon]</span>"}
+
+/// Returns the mob's accent flavor text. If any.
+/mob/proc/get_accent_flavor_text()
+	return
 
 /mob/assign_player(var/mob/user)
 	ckey = user.ckey
